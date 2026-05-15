@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priyanka Debnath — Frontend Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#f8f6f2;
+  --bg2:#f0ede6;
+  --bg3:#e8e4db;
+  --ink:#1a1814;
+  --ink2:#5a554c;
+  --ink3:#9a9488;
+  --accent:#c85a2a;
+  --accent2:#e06c3c;
+  --accent-bg:#fdf0ea;
+  --green:#2a7a4a;
+  --green-bg:#eaf5ee;
+  --blue:#1e5fa8;
+  --blue-bg:#e8f0fa;
+  --purple:#6040b0;
+  --purple-bg:#f0ecfa;
+  --border:#ddd8ce;
+  --border2:#ccc6bc;
+  --white:#fff;
+  --card:#ffffff;
+  --radius:10px;
+  --radius-lg:16px;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Instrument Sans',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 4rem;
+  background:rgba(248,246,242,0.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Clash Display',sans-serif;
+  font-weight:700;font-size:1.25rem;
+  color:var(--ink);letter-spacing:-0.02em;
+  text-decoration:none;
+}
+.nav-logo em{color:var(--accent);font-style:normal;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{
+  text-decoration:none;color:var(--ink2);font-size:.85rem;
+  font-weight:500;letter-spacing:.02em;transition:color .2s;
+}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 20px;border-radius:100px;
+  background:var(--ink);color:var(--bg);
+  font-size:.82rem;font-weight:500;text-decoration:none;
+  transition:all .2s;border:none;cursor:pointer;
+  font-family:'Instrument Sans',sans-serif;
+}
+.nav-cta:hover{background:var(--accent);transform:translateY(-1px);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:8rem 4rem 5rem;
+  position:relative;
+  max-width:1400px;margin:0 auto;
+}
+.hero-content{flex:1;max-width:680px;position:relative;z-index:1;}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.78rem;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:1.75rem;
+}
+.hero-eyebrow::before{
+  content:'';display:block;
+  width:32px;height:1.5px;background:var(--accent);
+}
+
+.hero h1{
+  font-family:'Clash Display',sans-serif;
+  font-weight:700;
+  font-size:clamp(3.5rem,6.5vw,6.5rem);
+  line-height:.96;letter-spacing:-0.04em;
+  margin-bottom:2rem;color:var(--ink);
+}
+.hero h1 .name-part{display:block;}
+.hero h1 .title-part{
+  display:block;
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--ink3);
+  font-weight:600;
+}
+
+.hero-desc{
+  font-size:1.05rem;color:var(--ink2);
+  max-width:480px;line-height:1.8;margin-bottom:2.5rem;
+}
+
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem;}
+
+.btn-dark{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:8px;
+  background:var(--ink);color:var(--white);
+  font-family:'Instrument Sans',sans-serif;
+  font-size:.88rem;font-weight:500;
+  text-decoration:none;transition:all .2s;
+}
+.btn-dark:hover{background:var(--accent);transform:translateY(-1px);}
+
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:8px;
+  background:transparent;color:var(--ink2);
+  font-family:'Instrument Sans',sans-serif;
+  font-size:.88rem;font-weight:500;
+  text-decoration:none;
+  border:1px solid var(--border2);
+  transition:all .2s;
+}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink);background:var(--bg2);}
+
+/* HERO STATS */
+.hero-stats{
+  display:flex;gap:3rem;
+  padding-top:2.5rem;
+  border-top:1px solid var(--border);
+}
+.hero-stat .n{
+  font-family:'Clash Display',sans-serif;
+  font-size:2.4rem;font-weight:700;
+  color:var(--ink);line-height:1;
+}
+.hero-stat .n em{color:var(--accent);font-style:normal;}
+.hero-stat .l{font-size:.75rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;}
+
+/* HERO SIDE CARD */
+.hero-side{
+  flex:0 0 auto;
+  display:flex;flex-direction:column;gap:1rem;
+  padding-left:5rem;
+}
+.side-chip{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px 20px;
+  display:flex;align-items:center;gap:14px;
+  min-width:240px;
+  transition:all .2s;
+  cursor:default;
+}
+.side-chip:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.side-chip .chip-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.chip-orange{background:#fff0e8;}
+.chip-green{background:#e8f5ee;}
+.chip-blue{background:#e8f2ff;}
+.chip-purple{background:#f0ecff;}
+.side-chip .chip-label{font-size:.78rem;color:var(--ink3);margin-bottom:2px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
+.side-chip .chip-val{font-size:.9rem;color:var(--ink);font-weight:500;}
+
+/* ── SECTION BASE ── */
+.section{padding:6rem 4rem;max-width:1100px;margin:0 auto;}
+.section-inner{padding:6rem 4rem;max-width:1100px;margin:0 auto;}
+
+.section-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink3);
+  margin-bottom:1.25rem;
+}
+.section-tag::before{content:'';display:block;width:24px;height:1px;background:var(--ink3);}
+
+.section-h{
+  font-family:'Clash Display',sans-serif;
+  font-weight:700;
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  letter-spacing:-0.03em;
+  color:var(--ink);margin-bottom:1rem;
+  line-height:1.1;
+}
+.section-sub{
+  font-size:.98rem;color:var(--ink2);
+  max-width:500px;line-height:1.75;margin-bottom:3rem;
+}
+
+hr.divider{border:none;border-top:1px solid var(--border);margin:0;}
+
+/* ── ABOUT ── */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.about-body p{
+  font-size:1rem;color:var(--ink2);
+  line-height:1.85;margin-bottom:1.2rem;
+}
+.about-body p strong{color:var(--ink);font-weight:500;}
+
+.info-table{margin-top:2rem;display:flex;flex-direction:column;gap:.75rem;}
+.info-row{display:flex;align-items:baseline;gap:1rem;}
+.info-key{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:600;min-width:80px;}
+.info-val{font-size:.9rem;color:var(--ink2);}
+.info-val a{color:var(--accent);text-decoration:none;}
+.info-val a:hover{text-decoration:underline;}
+
+.about-right{display:flex;flex-direction:column;gap:1.25rem;}
+
+.about-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:1.25rem 1.5rem;
+  display:flex;gap:1rem;align-items:flex-start;
+  transition:all .2s;
+}
+.about-card:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(0,0,0,.05);}
+.about-card .ac-icon{
+  width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.about-card h4{font-family:'Clash Display',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:4px;color:var(--ink);}
+.about-card p{font-size:.82rem;color:var(--ink3);line-height:1.55;}
+
+/* CODECHEF BLOCK */
+.codechef-block{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:1.5rem;
+  display:flex;align-items:center;gap:1.5rem;
+}
+.cc-badge{
+  background:var(--ink);color:var(--white);
+  width:60px;height:60px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Clash Display',sans-serif;
+  font-size:1.1rem;font-weight:700;flex-shrink:0;
+}
+.cc-info h4{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.cc-info p{font-size:.82rem;color:var(--ink2);line-height:1.55;}
+.cc-stars{font-size:1.2rem;margin-top:6px;}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.skill-block{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:1.5rem;
+  transition:all .2s;
+}
+.skill-block:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(0,0,0,.05);}
+.skill-block-title{
+  font-family:'Clash Display',sans-serif;
+  font-size:.88rem;font-weight:600;
+  color:var(--ink);margin-bottom:1rem;
+  display:flex;align-items:center;gap:8px;
+}
+.skill-block-title .dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.dot-orange{background:var(--accent);}
+.dot-green{background:var(--green);}
+.dot-blue{background:var(--blue);}
+.dot-purple{background:var(--purple);}
+.dot-teal{background:#0d9488;}
+.dot-gray{background:#6b7280;}
+
+.skill-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{
+  font-size:.78rem;font-weight:500;
+  padding:5px 13px;border-radius:100px;
+  border:1px solid;
+}
+.pill-orange{background:var(--accent-bg);color:#c85a2a;border-color:#f0c4ac;}
+.pill-green{background:var(--green-bg);color:#2a7a4a;border-color:#b0d8bc;}
+.pill-blue{background:var(--blue-bg);color:#1e5fa8;border-color:#b0ccf0;}
+.pill-purple{background:var(--purple-bg);color:#6040b0;border-color:#c8bcf0;}
+.pill-teal{background:#f0fdfc;color:#0d9488;border-color:#99e6e0;}
+.pill-gray{background:#f4f4f5;color:#52525b;border-color:#d4d4d8;}
+
+/* ── PROJECTS ── */
+.projects-list{display:flex;flex-direction:column;gap:1.5rem;}
+
+.project-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  transition:all .25s;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:start;
+  padding:2rem 2rem 2rem 0;
+}
+.project-card:hover{border-color:var(--border2);box-shadow:0 6px 30px rgba(0,0,0,.06);}
+
+.project-accent-bar{
+  width:4px;height:100%;flex-shrink:0;
+  border-radius:4px 0 0 4px;
+  align-self:stretch;
+  margin-right:2rem;
+}
+.bar-orange{background:linear-gradient(180deg,var(--accent),#f0a070);}
+.bar-blue{background:linear-gradient(180deg,var(--blue),#5a9ae8);}
+.bar-green{background:linear-gradient(180deg,var(--green),#5ab07a);}
+.bar-purple{background:linear-gradient(180deg,var(--purple),#9070d8);}
+.bar-yellow{background:linear-gradient(180deg,#d97706,#fbbf24);}
+
+.project-main{flex:1;padding-left:0;}
+.project-wrap{display:flex;gap:0;}
+
+.project-meta{
+  display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap;
+}
+.project-type{
+  font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;
+  padding:3px 10px;border-radius:100px;
+}
+.type-react{background:var(--blue-bg);color:var(--blue);}
+.type-js{background:#fef9ec;color:#b05a00;}
+.type-php{background:var(--purple-bg);color:var(--purple);}
+.type-ml{background:var(--green-bg);color:var(--green);}
+
+.live-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.7rem;font-weight:600;color:var(--green);
+  background:var(--green-bg);
+  padding:3px 10px;border-radius:100px;
+}
+.live-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);}
+
+.project-card h3{
+  font-family:'Clash Display',sans-serif;
+  font-size:1.3rem;font-weight:700;
+  color:var(--ink);letter-spacing:-0.02em;margin-bottom:.65rem;
+}
+.project-card p{
+  font-size:.88rem;color:var(--ink2);line-height:1.7;margin-bottom:1.25rem;
+}
+
+.project-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
+.tech-chip{
+  font-size:.72rem;font-weight:500;
+  padding:4px 11px;border-radius:6px;
+  background:var(--bg2);color:var(--ink2);
+  border:1px solid var(--border);
+}
+
+.project-links{display:flex;gap:.75rem;}
+.proj-link{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.8rem;font-weight:500;
+  padding:7px 16px;border-radius:7px;
+  text-decoration:none;transition:all .2s;
+}
+.proj-link-primary{
+  background:var(--ink);color:var(--white);
+}
+.proj-link-primary:hover{background:var(--accent);}
+.proj-link-ghost{
+  background:transparent;color:var(--ink2);
+  border:1px solid var(--border2);
+}
+.proj-link-ghost:hover{color:var(--ink);border-color:var(--ink);background:var(--bg2);}
+
+.project-visual{
+  padding:0 2rem 0 1.5rem;
+  display:flex;align-items:flex-start;
+  justify-content:flex-end;
+}
+.proj-img-placeholder{
+  width:180px;height:120px;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:8px;
+  font-size:2.5rem;
+  border:1px solid var(--border);
+}
+.proj-img-placeholder .proj-label{font-size:.7rem;color:var(--ink3);font-weight:500;text-align:center;}
+
+/* ── FUN PROJECTS / MINI SERIES ── */
+.mini-series-header{
+  display:flex;align-items:center;gap:1rem;
+  margin:3rem 0 1.5rem;
+}
+.mini-series-header h3{
+  font-family:'Clash Display',sans-serif;
+  font-size:1.3rem;font-weight:700;
+  color:var(--ink);letter-spacing:-0.02em;
+}
+.mini-series-header .series-pill{
+  font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;
+  padding:4px 12px;border-radius:100px;
+  background:#fef9ec;color:#b05a00;
+  border:1px solid #f5d799;
+}
+.mini-series-desc{
+  font-size:.9rem;color:var(--ink2);
+  margin-bottom:1.5rem;line-height:1.7;
+}
+
+.mini-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+.mini-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:1.25rem 1.25rem 1rem;
+  display:flex;flex-direction:column;gap:.6rem;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
+}
+.mini-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:3px;
+  border-radius:16px 16px 0 0;
+}
+.mini-card.mc-orange::before{background:linear-gradient(90deg,var(--accent),#f0a070);}
+.mini-card.mc-blue::before{background:linear-gradient(90deg,var(--blue),#5a9ae8);}
+.mini-card.mc-green::before{background:linear-gradient(90deg,var(--green),#5ab07a);}
+.mini-card.mc-purple::before{background:linear-gradient(90deg,var(--purple),#9070d8);}
+.mini-card.mc-yellow::before{background:linear-gradient(90deg,#d97706,#fbbf24);}
+.mini-card.mc-teal::before{background:linear-gradient(90deg,#0d9488,#5eead4);}
+.mini-card.mc-pink::before{background:linear-gradient(90deg,#be185d,#f472b6);}
+
+.mini-card:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(0,0,0,.07);transform:translateY(-2px);}
+.mini-icon{font-size:1.6rem;}
+.mini-name{
+  font-family:'Clash Display',sans-serif;
+  font-size:.95rem;font-weight:600;color:var(--ink);
+}
+.mini-desc{font-size:.78rem;color:var(--ink3);line-height:1.5;}
+.mini-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:.25rem;
+}
+.mini-series-tag{
+  font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--ink3);
+}
+.mini-gh-link{
+  font-size:.75rem;font-weight:500;color:var(--accent);
+  text-decoration:none;display:flex;align-items:center;gap:3px;
+}
+.mini-gh-link:hover{text-decoration:underline;}
+
+/* Series divider */
+.series-divider{
+  display:flex;align-items:center;gap:1rem;
+  margin:2rem 0 1.25rem;
+}
+.series-divider span{
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink3);white-space:nowrap;
+}
+.series-divider::before,.series-divider::after{
+  content:'';flex:1;height:1px;background:var(--border);
+}
+
+/* ── TOOLS ── */
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
+.tool-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:1.5rem;text-align:center;
+  transition:all .2s;
+}
+.tool-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.06);}
+.tool-icon{font-size:2.2rem;margin-bottom:.75rem;}
+.tool-name{font-family:'Clash Display',sans-serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.tool-desc{font-size:.78rem;color:var(--ink3);line-height:1.5;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3.5rem;align-items:start;}
+.contact-left h2{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:700;letter-spacing:-0.03em;
+  margin-bottom:1rem;color:var(--ink);line-height:1.1;
+}
+.contact-left p{font-size:.98rem;color:var(--ink2);line-height:1.8;margin-bottom:2rem;}
+
+.social-stack{display:flex;flex-direction:column;gap:.75rem;}
+.soc-link{
+  display:flex;align-items:center;gap:14px;
+  padding:12px 16px;border-radius:10px;
+  border:1px solid var(--border);
+  text-decoration:none;background:var(--white);
+  transition:all .2s;
+}
+.soc-link:hover{border-color:var(--border2);transform:translateX(3px);box-shadow:0 4px 16px rgba(0,0,0,.05);}
+.soc-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.soc-info .soc-name{font-size:.85rem;font-weight:500;color:var(--ink);}
+.soc-info .soc-val{font-size:.78rem;color:var(--ink3);}
+.soc-arrow{margin-left:auto;font-size:.85rem;color:var(--ink3);}
+
+.contact-form{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+}
+.contact-form h3{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:1.5rem;color:var(--ink);}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-bottom:6px;}
+.fg input,.fg textarea{
+  width:100%;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:7px;
+  padding:10px 14px;
+  color:var(--ink);
+  font-family:'Instrument Sans',sans-serif;
+  font-size:.9rem;
+  outline:none;
+  transition:border-color .2s;
+  resize:none;
+}
+.fg input:focus,.fg textarea:focus{border-color:var(--accent);}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:1100px;margin:0 auto;
+}
+footer p{font-size:.8rem;color:var(--ink3);}
+footer .back-top{
+  font-size:.78rem;color:var(--ink3);
+  text-decoration:none;
+  display:flex;align-items:center;gap:4px;
+  transition:color .2s;
+}
+footer .back-top:hover{color:var(--ink);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .7s cubic-bezier(.16,1,.3,1) both;}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}.d5{animation-delay:.58s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero{flex-direction:column;padding:7rem 1.5rem 4rem;gap:3rem;}
+  .hero-side{padding-left:0;}
+  .section,.section-inner{padding:4rem 1.5rem;}
+  .about-wrap,.contact-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .tools-grid{grid-template-columns:repeat(2,1fr);}
+  .project-card{grid-template-columns:1fr;}
+  .project-visual{display:none;}
+  .mini-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem;}
+  hr.divider{margin:0 1.5rem;}
+}
+@media(max-width:540px){
+  .mini-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">PD<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://github.com/priyankadn20" class="nav-cta" target="_blank">GitHub ↗</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow fu">Frontend Developer · Open to work</div>
+    <h1 class="fu d1">
+      <span class="name-part">Priyanka</span>
+      <span class="name-part">Debnath</span>
+      <span class="title-part">Frontend Dev.</span>
+    </h1>
+    <p class="hero-desc fu d2">
+      I build fast, beautiful, and accessible web interfaces — from Figma designs
+      to production-ready React apps. Passionate about clean UI, REST APIs, and writing
+      code that solves real problems.
+    </p>
+    <div class="hero-actions fu d3">
+      <a href="#projects" class="btn-dark">See My Work ↓</a>
+      <a href="mailto:preyankadebnath2002@gmail.com" class="btn-ghost">Let's Talk →</a>
+    </div>
+    <div class="hero-stats fu d4">
+      <div class="hero-stat">
+        <div class="n">33<em>+</em></div>
+        <div class="l">Repositories</div>
+      </div>
+      <div class="hero-stat">
+        <div class="n">200<em>+</em></div>
+        <div class="l">Problems Solved</div>
+      </div>
+      <div class="hero-stat">
+        <div class="n">4<em>+</em></div>
+        <div class="l">Major Projects</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-side fu d5">
+    <div class="side-chip">
+      <div class="chip-icon chip-orange">⚛️</div>
+      <div>
+        <div class="chip-label">Primary Stack</div>
+        <div class="chip-val">React · JS · Tailwind</div>
+      </div>
+    </div>
+    <div class="side-chip">
+      <div class="chip-icon chip-green">✅</div>
+      <div>
+        <div class="chip-label">Deployed on</div>
+        <div class="chip-val">Vercel (2 live apps)</div>
+      </div>
+    </div>
+    <div class="side-chip">
+      <div class="chip-icon chip-blue">🎨</div>
+      <div>
+        <div class="chip-label">Design Tool</div>
+        <div class="chip-val">Figma — UI/UX Design</div>
+      </div>
+    </div>
+    <div class="side-chip">
+      <div class="chip-icon chip-purple">🏆</div>
+      <div>
+        <div class="chip-label">CodeChef</div>
+        <div class="chip-val">200+ problems solved</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-tag">About Me</div>
+  <div class="about-wrap">
+    <div class="about-body">
+      <p>
+        Hi! I'm <strong>Priyanka Debnath</strong> — a fresher frontend developer who genuinely loves
+        crafting interfaces that feel good to use. I started with HTML &amp; CSS, levelled up through
+        JavaScript and React, and now I build complete full-stack projects with REST APIs, MongoDB,
+        and MySQL backends.
+      </p>
+      <p>
+        Beyond just coding, I design in <strong>Figma</strong> before I build — so I understand the
+        full product lifecycle from wireframe to deployed app. I test my APIs in <strong>Postman</strong>,
+        keep my code clean, and actively sharpen my logic through <strong>competitive programming</strong>
+        on CodeChef.
+      </p>
+      <p>
+        I'm looking for my first professional role where I can contribute to a real product,
+        grow fast, and build things that matter.
+      </p>
+      <div class="info-table">
+        <div class="info-row">
+          <span class="info-key">Email</span>
+          <span class="info-val"><a href="mailto:preyankadebnath2002@gmail.com">preyankadebnath2002@gmail.com</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">LinkedIn</span>
+          <span class="info-val"><a href="https://www.linkedin.com/in/preyanka-debnath-330a1a374/" target="_blank">in/preyanka-debnath-330a1a374</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">GitHub</span>
+          <span class="info-val"><a href="https://github.com/priyankadn20" target="_blank">github.com/priyankadn20</a></span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Status</span>
+          <span class="info-val" style="color:var(--green);">● Available for opportunities</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <div class="about-card">
+        <div class="ac-icon" style="background:#fff0e8;">🎨</div>
+        <div>
+          <h4>Figma Design</h4>
+          <p>I design UI/UX in Figma before writing a single line of code — wireframes, components, prototypes.</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon" style="background:#e8f5ee;">⚡</div>
+        <div>
+          <h4>API Development & Testing</h4>
+          <p>Built and tested REST APIs using Postman — auth flows, CRUD endpoints, and response validation.</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="ac-icon" style="background:#e8f2ff;">🗄️</div>
+        <div>
+          <h4>Database Work</h4>
+          <p>Experience with both MySQL (relational) and MongoDB (NoSQL) — schema design, queries, and integration.</p>
+        </div>
+      </div>
+
+      <div class="codechef-block">
+        <div class="cc-badge">CC</div>
+        <div class="cc-info">
+          <h4>CodeChef — Competitive Programming</h4>
+          <p>Solved 200+ algorithmic problems — arrays, strings, math, DP, and more.</p>
+          <div class="cc-stars">⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-tag">Technical Skills</div>
+  <div class="section-h">What I Build With</div>
+  <p class="section-sub">A growing stack built through real projects, not just tutorials.</p>
+
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-block-title"><span class="dot dot-orange"></span>Frontend Core</div>
+      <div class="skill-pills">
+        <span class="pill pill-orange">HTML5</span>
+        <span class="pill pill-orange">CSS3</span>
+        <span class="pill pill-orange">JavaScript (ES6+)</span>
+        <span class="pill pill-orange">Responsive Design</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title"><span class="dot dot-blue"></span>React Ecosystem</div>
+      <div class="skill-pills">
+        <span class="pill pill-blue">React.js</span>
+        <span class="pill pill-blue">React Router</span>
+        <span class="pill pill-blue">Context API</span>
+        <span class="pill pill-blue">Hooks</span>
+        <span class="pill pill-blue">Vite</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title"><span class="dot dot-teal"></span>Styling</div>
+      <div class="skill-pills">
+        <span class="pill pill-teal">Tailwind CSS</span>
+        <span class="pill pill-teal">CSS Flexbox</span>
+        <span class="pill pill-teal">CSS Grid</span>
+        <span class="pill pill-teal">Figma → Code</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title"><span class="dot dot-green"></span>Backend & APIs</div>
+      <div class="skill-pills">
+        <span class="pill pill-green">Node.js</span>
+        <span class="pill pill-green">Express.js</span>
+        <span class="pill pill-green">REST APIs</span>
+        <span class="pill pill-green">Postman</span>
+        <span class="pill pill-green">PHP</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title"><span class="dot dot-purple"></span>Databases</div>
+      <div class="skill-pills">
+        <span class="pill pill-purple">MongoDB</span>
+        <span class="pill pill-purple">MySQL</span>
+        <span class="pill pill-purple">Mongoose</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-title"><span class="dot dot-gray"></span>Other Skills</div>
+      <div class="skill-pills">
+        <span class="pill pill-gray">Git & GitHub</span>
+        <span class="pill pill-gray">VS Code</span>
+        <span class="pill pill-gray">Python</span>
+        <span class="pill pill-gray">C / C++</span>
+        <span class="pill pill-gray">Problem Solving</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-tag">Projects</div>
+  <div class="section-h">Things I've Shipped</div>
+  <p class="section-sub">Full projects — from design to deployment. Two are live on Vercel.</p>
+
+  <div class="projects-list">
+
+    <!-- E-Commerce -->
+    <div class="project-card">
+      <div class="project-wrap" style="display:flex;width:100%;">
+        <div class="project-accent-bar bar-orange"></div>
+        <div class="project-main" style="flex:1;">
+          <div class="project-meta">
+            <span class="project-type type-react">React · Full Stack</span>
+            <span class="live-badge">Live on Vercel</span>
+          </div>
+          <h3>E-Commerce Platform</h3>
+          <p>
+            A complete e-commerce web application with separate frontend, backend (Node/Express),
+            and admin panel. Features product listing, cart, order management, and full REST API
+            integration tested via Postman. MongoDB used as the database.
+          </p>
+          <div class="project-tech">
+            <span class="tech-chip">React.js</span>
+            <span class="tech-chip">Node.js</span>
+            <span class="tech-chip">Express.js</span>
+            <span class="tech-chip">MongoDB</span>
+            <span class="tech-chip">Postman</span>
+            <span class="tech-chip">JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://e-commerce-project-xi-rouge.vercel.app" class="proj-link proj-link-primary" target="_blank">Live Demo ↗</a>
+            <a href="https://github.com/priyankadn20/E-commerce-project" class="proj-link proj-link-ghost" target="_blank">GitHub →</a>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="proj-img-placeholder" style="background:#fff8f5;">
+            <span>🛒</span>
+            <span class="proj-label">E-Commerce</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotel Booking -->
+    <div class="project-card">
+      <div class="project-wrap" style="display:flex;width:100%;">
+        <div class="project-accent-bar bar-blue"></div>
+        <div class="project-main" style="flex:1;">
+          <div class="project-meta">
+            <span class="project-type type-react">React · Vite</span>
+            <span class="live-badge">Live on Vercel</span>
+          </div>
+          <h3>Hotel Booking App</h3>
+          <p>
+            A React + Vite hotel booking application with smooth UI, room browsing,
+            and booking flow. Built with component-based architecture and fast HMR
+            development. Deployed live on Vercel.
+          </p>
+          <div class="project-tech">
+            <span class="tech-chip">React.js</span>
+            <span class="tech-chip">Vite</span>
+            <span class="tech-chip">JavaScript</span>
+            <span class="tech-chip">CSS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://hotel-booking-two-zeta.vercel.app" class="proj-link proj-link-primary" target="_blank">Live Demo ↗</a>
+            <a href="https://github.com/priyankadn20/Hotel-Booking" class="proj-link proj-link-ghost" target="_blank">GitHub →</a>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="proj-img-placeholder" style="background:#f5f8ff;">
+            <span>🏨</span>
+            <span class="proj-label">Hotel Booking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Management -->
+    <div class="project-card">
+      <div class="project-wrap" style="display:flex;width:100%;">
+        <div class="project-accent-bar bar-purple"></div>
+        <div class="project-main" style="flex:1;">
+          <div class="project-meta">
+            <span class="project-type type-php">PHP · Full Stack</span>
+          </div>
+          <h3>Student Management System</h3>
+          <p>
+            A full-featured PHP & MySQL web application with separate Admin and Student dashboards.
+            Includes authentication, student/teacher/course CRUD, role-based access control,
+            and a polished responsive CSS UI.
+          </p>
+          <div class="project-tech">
+            <span class="tech-chip">PHP</span>
+            <span class="tech-chip">MySQL</span>
+            <span class="tech-chip">HTML/CSS</span>
+            <span class="tech-chip">JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/priyankadn20/Student-management" class="proj-link proj-link-ghost" target="_blank">GitHub →</a>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="proj-img-placeholder" style="background:#f8f5ff;">
+            <span>🎓</span>
+            <span class="proj-label">Student Mgmt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Face Mask Detection -->
+    <div class="project-card">
+      <div class="project-wrap" style="display:flex;width:100%;">
+        <div class="project-accent-bar bar-green"></div>
+        <div class="project-main" style="flex:1;">
+          <div class="project-meta">
+            <span class="project-type type-ml">Python · Deep Learning</span>
+          </div>
+          <h3>Face Mask Detection (CNN)</h3>
+          <p>
+            A Convolutional Neural Network trained to detect face mask usage from images.
+            Built with TensorFlow/Keras on the Kaggle Face Mask Dataset —
+            includes full preprocessing pipeline, model evaluation, and single-image prediction.
+          </p>
+          <div class="project-tech">
+            <span class="tech-chip">Python</span>
+            <span class="tech-chip">TensorFlow</span>
+            <span class="tech-chip">Keras</span>
+            <span class="tech-chip">OpenCV</span>
+            <span class="tech-chip">CNN</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/priyankadn20/face-mask-detection-project" class="proj-link proj-link-ghost" target="_blank">GitHub →</a>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="proj-img-placeholder" style="background:#edfaf5;">
+            <span>🤖</span>
+            <span class="proj-label">ML Project</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bangla Caption Generator — Final Year Project -->
+    <div class="project-card">
+      <div class="project-wrap" style="display:flex;width:100%;">
+        <div class="project-accent-bar bar-green"></div>
+        <div class="project-main" style="flex:1;">
+          <div class="project-meta">
+            <span class="project-type type-ml">Python · AI · Final Year Project</span>
+            <span class="live-badge" style="background:#fff8e8;color:#b06000;">⭐ Flagship</span>
+          </div>
+          <h3>Bangla Image Caption Generator</h3>
+          <p>
+            Final year project — an AI-powered web app that automatically generates
+            Bangla captions for uploaded images using deep learning. Built a full-stack
+            application with a Python (Flask) backend, custom-trained model, and a
+            multi-page HTML/CSS frontend with login, register, demo, and about pages.
+          </p>
+          <div class="project-tech">
+            <span class="tech-chip">Python</span>
+            <span class="tech-chip">Flask</span>
+            <span class="tech-chip">Deep Learning</span>
+            <span class="tech-chip">HTML/CSS</span>
+            <span class="tech-chip">NLP</span>
+            <span class="tech-chip">Image Captioning</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/priyankadn20/generate-bangla-caption-app-final-year-project" class="proj-link proj-link-ghost" target="_blank">GitHub →</a>
+          </div>
+        </div>
+        <div class="project-visual">
+          <div class="proj-img-placeholder" style="background:#edfaf5;">
+            <span>🇧🇩</span>
+            <span class="proj-label">Final Year Project</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── JS MINI PROJECT SERIES ── -->
+  <div class="mini-series-header">
+    <h3>✨ JS Mini Project Series</h3>
+    <span class="series-pill">Fun Projects</span>
+  </div>
+  <p class="mini-desc">
+    A collection of bite-sized JavaScript projects I built to sharpen my DOM manipulation, event handling, and vanilla JS skills — each one is a self-contained interactive app.
+  </p>
+
+  <!-- Series 1 -->
+  <div class="series-divider"></div>
+  <div class="mini-grid">
+
+    <div class="mini-card mc-orange">
+      <div class="mini-icon">📝</div>
+      <div class="mini-name">Note App</div>
+      <div class="mini-desc">Create, edit, and delete notes in real-time. Local state management with clean UI.</div>
+      <div class="mini-footer">
+        <span class="mini-series-tag">Series 1</span>
+        <a href="https://github.com/priyankadn20/javascript-miniProject-series-1/tree/main/Build-Note-App" class="mini-gh-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="mini-card mc-blue">
+      <div class="mini-icon">📷</div>
+      <div class="mini-name">QR Code Maker</div>
+      <div class="mini-desc">Generate QR codes on-the-fly from any text or URL using a JS API integration.</div>
+      <div class="mini-footer">
+        <span class="mini-series-tag">Series 1</span>
+        <a href="https://github.com/priyankadn20/javascript-miniProject-series-1/tree/main/qr-code-mamke" class="mini-gh-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="mini-card mc-teal">
+      <div class="mini-icon">🌤️</div>
+      <div class="mini-name">Weather App</div>
+      <div class="mini-desc">Fetch and display real-time weather data from an API based on city input.</div>
+      <div class="mini-footer">
+        <span class="mini-series-tag">Series 1</span>
+        <a href="https://github.com/priyankadn20/javascript-miniProject-series-1/tree/main/weather-app" class="mini-gh-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+     <div class="mini-card mc-teal">
+      <div class="mini-icon">🖼️</div>
+      <div class="mini-name">Slideshow</div>
+      <div class="mini-desc">Auto-advancing image slideshow with manual navigation and smooth transitions.</div>
+      <div class="mini-footer">
+        <span class="mini-series-tag">Series 2</span>
+        <a href="https://github.com/priyankadn20/javascript-miniProject-series-2" class="mini-gh-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+    <div class="mini-card mc-blue">
+      <div class="mini-icon">🔐</div>
+      <div class="mini-name">Login Form</div>
+      <div class="mini-desc">Client-side form validation with real-time feedback and error handling.</div>
+      <div class="mini-footer">
+        <span class="mini-series-tag">Series 2</span>
+        <a href="https://github.com/priyankadn20/javascript-miniProject-series-2" class="mini-gh-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+    <div class="mini-card mc-purple">
+      <div class="mini-icon">🎯</div>
+      <div class="mini-name">Guessing Game</div>
+      <div class="mini-desc">Random number guessing game with attempt tracking and hot/cold feedback.</div>
+      <div class="mini-footer">
+        <span class="mini-series-tag">Series 2</span>
+        <a href="https://github.com/priyankadn20/javascript-miniProject-series-2" class="mini-gh-link" target="_blank">GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<hr class="divider">
+
+<!-- TOOLS & WORKFLOW -->
+<section class="section" id="tools">
+  <div class="section-tag">Tools & Workflow</div>
+  <div class="section-h">How I Work</div>
+  <p class="section-sub">My day-to-day tools that take a project from idea to deployment.</p>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-icon">🎨</div>
+      <div class="tool-name">Figma</div>
+      <div class="tool-desc">UI/UX design, wireframing, and component design before coding</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📮</div>
+      <div class="tool-name">Postman</div>
+      <div class="tool-desc">API testing, request collections, and backend validation</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">⚛️</div>
+      <div class="tool-name">React + Vite</div>
+      <div class="tool-desc">Component-based UIs with fast dev server and optimized builds</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🗄️</div>
+      <div class="tool-name">MongoDB & MySQL</div>
+      <div class="tool-desc">NoSQL & relational databases for data storage and queries</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🚀</div>
+      <div class="tool-name">Vercel</div>
+      <div class="tool-desc">Deployed 2 live projects — zero-config frontend deployments</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🏆</div>
+      <div class="tool-name">CodeChef</div>
+      <div class="tool-desc">200+ problems solved — algorithms, data structures, logic</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🐙</div>
+      <div class="tool-name">Git & GitHub</div>
+      <div class="tool-desc">Version control, branching, and 33+ public repositories</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🖥️</div>
+      <div class="tool-name">VS Code</div>
+      <div class="tool-desc">Primary code editor with extensions for productivity</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔬</div>
+      <div class="tool-name">Google Colab</div>
+      <div class="tool-desc">Cloud-based notebook for training ML models and running Python experiments</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-tag">Get In Touch</div>
+  <div class="contact-grid">
+    <div class="contact-left">
+      <h2>let's connect.</h2>
+      <p>
+        I'm actively looking for my first frontend developer role — internship or full-time.
+        If you're working on something exciting, or just want to say hi, I'd love to hear from you!
+      </p>
+      <div class="social-stack">
+        <a href="mailto:preyankadebnath2002@gmail.com" class="soc-link">
+          <div class="soc-icon" style="background:#fff0e8;">📧</div>
+          <div class="soc-info">
+            <div class="soc-name">Email</div>
+            <div class="soc-val">preyankadebnath2002@gmail.com</div>
+          </div>
+          <span class="soc-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/preyanka-debnath-330a1a374/" target="_blank" class="soc-link">
+          <div class="soc-icon" style="background:#e8f2ff;">💼</div>
+          <div class="soc-info">
+            <div class="soc-name">LinkedIn</div>
+            <div class="soc-val">in/preyanka-debnath-330a1a374</div>
+          </div>
+          <span class="soc-arrow">→</span>
+        </a>
+        <a href="https://github.com/priyankadn20" target="_blank" class="soc-link">
+          <div class="soc-icon" style="background:#f4f4f5;">⌨️</div>
+          <div class="soc-info">
+            <div class="soc-name">GitHub</div>
+            <div class="soc-val">github.com/priyankadn20</div>
+          </div>
+          <span class="soc-arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com/priyanka_debnath_221/" target="_blank" class="soc-link">
+          <div class="soc-icon" style="background:#fdf0fa;">📸</div>
+          <div class="soc-info">
+            <div class="soc-name">Instagram</div>
+            <div class="soc-val">@priyanka_debnath_221</div>
+          </div>
+          <span class="soc-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Send a Message</h3>
+      <div class="fg">
+        <label>Your Name</label>
+        <input type="text" placeholder="Enter your name">
+      </div>
+      <div class="fg">
+        <label>Email</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="fg">
+        <label>Message</label>
+        <textarea rows="4" placeholder="Hi Priyanka, I'd love to connect…"></textarea>
+      </div>
+      <a href="mailto:preyankadebnath2002@gmail.com" class="btn-dark" style="display:flex;justify-content:center;width:100%;text-align:center;">
+        Send Email ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Priyanka Debnath — Frontend Developer</p>
+  <a href="#" class="back-top">Back to top ↑</a>
+</footer>
+
+</body>
+</html>
